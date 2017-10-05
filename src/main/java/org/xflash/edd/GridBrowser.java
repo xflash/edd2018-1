@@ -1,5 +1,6 @@
 package org.xflash.edd;
 
+import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -76,5 +77,15 @@ class GridBrowser {
 
     public int sum4(Pill p) {
         return p.V() ? colSum(p.x) : rowSum(p.y);
+    }
+
+    public boolean checkOverlaps(Pill p, Set<Pill> pills) {
+        for (Pill pill : pills) {
+            if (p.H() && (pill.x == p.x - 1 || pill.x == p.x - 2))
+                return true;
+            if (p.V() && (pill.y == p.y - 1 || pill.y == p.y - 2))
+                return true;
+        }
+        return false;
     }
 }

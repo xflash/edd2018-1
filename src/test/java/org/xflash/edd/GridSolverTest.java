@@ -19,7 +19,7 @@ public class GridSolverTest {
     @Before
     public void setUp() throws Exception {
         grid = GridBuilder
-                .with(5, 5)
+                .with(5)
                 .colsSums(new int[]{2, 1, 2, 2, 3})
                 .cells(new int[][]{
                         {1, 2, 2, 1, 2},

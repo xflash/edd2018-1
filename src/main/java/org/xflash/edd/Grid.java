@@ -1,8 +1,11 @@
 package org.xflash.edd;
 
 public class Grid {
-    private final int w;
+    final int w;
     private final int h;
+    public int[] colsSums;
+    public int[] rowsSums;
+    public int[][] cells;
 
     public Grid(int w, int h) {
         this.w = w;

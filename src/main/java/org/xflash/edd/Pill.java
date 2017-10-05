@@ -1,5 +1,7 @@
 package org.xflash.edd;
 
+import static org.xflash.edd.Pill.Orientation.V;
+
 public class Pill {
 
     final int x;
@@ -39,6 +41,14 @@ public class Pill {
                 ", y=" + y +
                 ", orientation=" + orientation +
                 '}';
+    }
+
+    public boolean V() {
+        return V.equals(orientation);
+    }
+
+    public boolean H() {
+        return Orientation.H.equals(orientation);
     }
 
     public static enum Orientation {

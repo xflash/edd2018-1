@@ -1,8 +1,5 @@
 package org.xflash.edd;
 
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
-import org.hamcrest.TypeSafeMatcher;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +8,7 @@ import java.util.List;
 
 import static org.xflash.edd.Pill.Orientation.H;
 import static org.xflash.edd.Pill.Orientation.V;
+import static org.xflash.edd.PillMatchers.isAPill;
 
 public class GridSolverTest {
 
@@ -44,24 +42,5 @@ public class GridSolverTest {
         Assert.assertThat(pills.get(3), isAPill(H, 0, 5));
     }
 
-    private Matcher<? super Pill> isAPill(final Pill.Orientation orientation, final int x, final int y) {
-        return new TypeSafeMatcher<Pill>() {
-            public void describeTo(Description description) {
-                description.appendText("Is a Pill with orientation : ")
-                        .appendValue(orientation)
-                        .appendText(" at ")
-                        .appendValue(x)
-                        .appendText(",")
-                        .appendValue(y);
-            }
 
-            protected boolean matchesSafely(Pill item) {
-                return item!=null
-                        && orientation.equals(item.orientation)
-                        && x == item.x
-                        && y == item.y
-                        ;
-            }
-        };
-    }
 }

@@ -16,21 +16,23 @@ public class GridSolver {
     public List<Pill> solve() {
         int maxNb = grid.w;
         for (int i = 1; i <= maxNb; i++) {
-            findAllPossibilitiesFor(i);
+            findAllPillsMatching(i);
         }
 
         return Collections.emptyList();
     }
 
-    private Set<Pill> findAllPossibilitiesFor(int t) {
-        HashSet<Pill> pills = new HashSet<Pill>();
+    Set<Pill> findAllPillsMatching(int t) {
 
-        new GridBrowser(grid)
-                .forEachPill(p -> {
-                });
+        Set<Pill> matchingSums = new HashSet<>();
 
+        GridBrowser gb = new GridBrowser(grid);
+        gb.forEachPill(p -> {
+            if (t == gb.sumPill(p))
+                matchingSums.add(p);
+        });
 
-        return pills;
+        return matchingSums;
     }
 
 }

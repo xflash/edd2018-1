@@ -15,17 +15,21 @@ class GridBrowser {
     }
 
     void forEachPill(Consumer<Pill> consumer) {
-        int nb = grid.cells.length / 3;
+        int nb = getMaxPillOffset();
         forEachRow((row, r) -> {
-            for (int i = 0; i <= nb + 1; i++) {
+            for (int i = 0; i <= nb; i++) {
                 consumer.accept(new Pill(H, i, r));
             }
         });
         forEachCol((col, c) -> {
-            for (int i = 0; i <= nb + 1; i++) {
+            for (int i = 0; i <= nb; i++) {
                 consumer.accept(new Pill(V, c, i));
             }
         });
+    }
+
+    private int getMaxPillOffset() {
+        return 1 + (grid.cells.length / 3);
     }
 
     void forEachRow(BiConsumer<int[], Integer> rowConsumer) {
@@ -43,5 +47,34 @@ class GridBrowser {
             }
             colConsumer.accept(col, i);
         }
+    }
+
+    public int sumPill(Pill p) {
+        int sum = 0;
+        if (p.orientation.equals(H) && p.x > getMaxPillOffset()
+                || p.orientation.equals(V) && p.y > getMaxPillOffset())
+            throw new IllegalArgumentException("This pill is out of bound " + p);
+        if (H.equals(p.orientation)) {
+            sum += grid.cells[p.y][p.x + 0];
+            sum += grid.cells[p.y][p.x + 1];
+            sum += grid.cells[p.y][p.x + 2];
+        } else {
+            sum += grid.cells[p.y + 0][p.x];
+            sum += grid.cells[p.y + 1][p.x];
+            sum += grid.cells[p.y + 2][p.x];
+        }
+        return sum;
+    }
+
+    public int colSum(int x) {
+        return grid.colsSums[x];
+    }
+
+    public int rowSum(int y) {
+        return grid.rowsSums[y];
+    }
+
+    public int sum4(Pill p) {
+        return p.V() ? colSum(p.x) : rowSum(p.y);
     }
 }

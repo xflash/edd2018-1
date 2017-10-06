@@ -1,6 +1,6 @@
 package org.xflash.edd;
 
-import javafx.util.Pair;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +20,16 @@ public class GridSolverFindingTest {
 
     public static final HashMap<Integer, Pair<Integer, Collection<Pill>>> EXPECTATIONS = new HashMap<>();
     private static Grid grid;
+
+    private static class Pair<K,V> {
+        public Pair(K k, V v) {
+            this.k = k;
+            this.v = v;
+        }
+
+        K k;
+        V v;
+    }
 
     static {
         EXPECTATIONS.put(1, new Pair<>(5, Arrays.asList(
@@ -73,7 +83,14 @@ public class GridSolverFindingTest {
     @Test
     public void checkFinding() throws Exception {
         GridSolver gridSolver = new GridSolver(grid);
-        Set<Pill> allFor1 = gridSolver.findAllPillsMatching(num);
+        Set<Pill> allFor = gridSolver.findAllPillsMatching(num);
+
+        Pair<Integer, Collection<Pill>> expectatedPills = EXPECTATIONS.get(num);
+        Assert.assertEquals(allFor.size(), expectatedPills.k.intValue());
+        for (Pill pill : expectatedPills.v) {
+            Assert.assertTrue("Check if pill "+pill+" is found for number                                                          "+ num, allFor.contains(pill));
+        }
+        //Assert.assertEquals(EXPECTATIONS.get(num));
 
     }
 

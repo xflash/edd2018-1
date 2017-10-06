@@ -1,7 +1,15 @@
 package org.xflash.edd;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.Set;
+
+import static org.xflash.edd.Pill.Orientation.H;
 
 public class GridPrinterTest {
 
@@ -28,7 +36,36 @@ public class GridPrinterTest {
 
     @Test
     public void check() throws Exception {
-        new GridPrinter(grid)
-                .print(System.out);
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        new GridPrinter(grid, new PrintStream(baos))
+                .print();
+        Assert.assertEquals(
+                "  2 1 2 2 3\n" +
+                        " +---------\n" +
+                        "2|1 2 2 1 2\n" +
+                        "1|1 0 2 0 1\n" +
+                        "1|0 0 1 0 0\n" +
+                        "2|0 2 3 2 2\n" +
+                        "4|2 1 1 1 2\n",
+                baos.toString());
+    }
+
+    @Test
+    public void checkWithMap() throws Exception {
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+        new GridPrinter(grid, new PrintStream(baos))
+                .printWithPill(Arrays.asList(new Pill(H, 0, 0)));
+        Assert.assertEquals(
+                "  2 1 2 2 3\n" +
+                " +---------\n" +
+                "2|1 2 2 1 2\n" +
+                "1|1 0 2 0 1\n" +
+                "1|0 0 1 0 0\n" +
+                "2|0 2 3 2 2\n" +
+                "4|2 1 1 1 2\n",
+                baos.toString());
     }
 }

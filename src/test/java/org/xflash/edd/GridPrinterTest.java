@@ -6,8 +6,7 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.Set;
+import java.util.Collections;
 
 import static org.xflash.edd.Pill.Orientation.H;
 
@@ -57,7 +56,7 @@ public class GridPrinterTest {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         new GridPrinter(grid, new PrintStream(baos))
-                .printWithPill(Arrays.asList(new Pill(H, 0, 0)));
+                .printWithPill(Collections.singletonList(new Pill(H, 0, 0)));
         Assert.assertEquals(
                 "  2 1 2 2 3\n" +
                 " +---------\n" +

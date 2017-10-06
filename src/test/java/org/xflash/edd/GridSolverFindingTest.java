@@ -18,28 +18,20 @@ import static org.xflash.edd.Pill.Orientation.V;
 @RunWith(Parameterized.class)
 public class GridSolverFindingTest {
 
-    public static final HashMap<Integer, Pair<Integer, Collection<Pill>>> EXPECTATIONS = new HashMap<>();
+    public static final HashMap<Integer, Collection<Pill>> EXPECTATIONS = new HashMap<>();
     private static Grid grid;
 
-    private static class Pair<K,V> {
-        public Pair(K k, V v) {
-            this.k = k;
-            this.v = v;
-        }
 
-        K k;
-        V v;
-    }
 
     static {
-        EXPECTATIONS.put(1, new Pair<>(5, Arrays.asList(
+        EXPECTATIONS.put(1, Arrays.asList(
                 new Pill(H, 0, 2),
                 new Pill(H, 1, 2),
                 new Pill(H, 2, 2),
                 new Pill(V, 0, 1),
                 new Pill(V, 3, 0)
-        )));
-        EXPECTATIONS.put(2, new Pair<>(6, Arrays.asList(
+        ));
+        EXPECTATIONS.put(2, Arrays.asList(
                 new Pill(H, 1, 1),
                 new Pill(H, 1, 2),
                 new Pill(V, 0, 0),
@@ -47,7 +39,7 @@ public class GridSolverFindingTest {
                 new Pill(V, 1, 0),
                 new Pill(V, 1, 1),
                 new Pill(V, 3, 1)
-        )));
+        ));
     }
 
     private int num;
@@ -85,10 +77,11 @@ public class GridSolverFindingTest {
         GridSolver gridSolver = new GridSolver(grid);
         Set<Pill> allFor = gridSolver.findAllPillsMatching(num);
 
-        Pair<Integer, Collection<Pill>> expectatedPills = EXPECTATIONS.get(num);
-        Assert.assertEquals(allFor.size(), expectatedPills.k.intValue());
-        for (Pill pill : expectatedPills.v) {
-            Assert.assertTrue("Check if pill "+pill+" is found for number                                                          "+ num, allFor.contains(pill));
+        Collection<Pill> expectatedPills = EXPECTATIONS.get(num);
+        Assert.assertEquals("Check " + allFor, allFor.size(), expectatedPills.size());
+        for (Pill pill : expectatedPills) {
+            Assert.assertTrue("Check if pill " + pill + " is found for number " + num + " in " + allFor,
+                    allFor.contains(pill));
         }
         //Assert.assertEquals(EXPECTATIONS.get(num));
 

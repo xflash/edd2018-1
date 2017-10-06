@@ -8,7 +8,7 @@ public class PillMatchers {
     static Matcher<? super Pill> isAPill(final Pill.Orientation orientation, final int x, final int y) {
         return new TypeSafeMatcher<Pill>() {
             public void describeTo(Description description) {
-                description.appendText("Is a Pill with orientation : ")
+                description.appendText("a Pill : ")
                         .appendValue(orientation)
                         .appendText(" at ")
                         .appendValue(x)

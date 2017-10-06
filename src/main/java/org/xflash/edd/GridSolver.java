@@ -18,7 +18,7 @@ public class GridSolver {
         for (Set<Pill> pills : map.values()) {
             for (Pill pill : pills) {
                 List<Pill> sol = findSolStartingWith(pill, map);
-                if(!sol.isEmpty())  {
+                if (!sol.isEmpty()) {
                     sola.add(sol);
                 }
             }
@@ -32,6 +32,15 @@ public class GridSolver {
     private List<Pill> findSolStartingWith(Pill rootPill, Map<Integer, Set<Pill>> map) {
         List<Pill> sol = Collections.emptyList();
 
+        GridBrowser gb = new GridBrowser(grid);
+
+        Set<Pill> set = new HashSet<>();
+        for (Set<Pill> pills : map.values()) {
+            pills.stream()
+                    .filter(p -> !gb.isOverlapping(rootPill, p))
+                    .filter(gb::isPillCorrectSum)
+                    .forEach(set::add);
+        }
 
         return sol;
     }
@@ -55,7 +64,7 @@ public class GridSolver {
                     otherPills.addAll(pills);
                 }
             }
-            pills.removeIf(p -> gb.checkOverlaps(p, otherPills));
+            pills.removeIf(p -> gb.isOverlapping(p, otherPills));
         }
     }
 

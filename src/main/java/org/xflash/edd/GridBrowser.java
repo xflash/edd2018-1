@@ -79,13 +79,22 @@ class GridBrowser {
         return p.V() ? colSum(p.x) : rowSum(p.y);
     }
 
-    public boolean checkOverlaps(Pill p, Set<Pill> pills) {
+    public boolean isOverlapping(Pill p, Set<Pill> pills) {
         for (Pill pill : pills) {
-            if (p.H() && (pill.x == p.x - 1 || pill.x == p.x - 2))
-                return true;
-            if (p.V() && (pill.y == p.y - 1 || pill.y == p.y - 2))
-                return true;
+            if (isOverlapping(p, pill)) return true;
         }
         return false;
+    }
+
+    public boolean isOverlapping(Pill p, Pill pill) {
+        if (p.H() && (pill.x == p.x - 1 || pill.x == p.x - 2))
+            return true;
+        if (p.V() && (pill.y == p.y - 1 || pill.y == p.y - 2))
+            return true;
+        return false;
+    }
+
+    public boolean isPillCorrectSum(Pill pill) {
+        return sum4(pill) == sumPill(pill);
     }
 }

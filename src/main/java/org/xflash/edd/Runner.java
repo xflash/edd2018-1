@@ -1,5 +1,6 @@
 package org.xflash.edd;
 
+import java.util.Collection;
 import java.util.List;
 
 public class Runner {
@@ -19,7 +20,7 @@ public class Runner {
                         .get();
 
         GridSolver gridSolver = new GridSolver(grid);
-        List<Pill> pills = gridSolver.solve();
+        Collection<List<Pill>> pills = gridSolver.solve();
 
 
     }

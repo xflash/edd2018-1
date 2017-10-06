@@ -4,8 +4,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Collection;
 import java.util.List;
 
+import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.xflash.edd.Pill.Orientation.H;
 import static org.xflash.edd.Pill.Orientation.V;
 import static org.xflash.edd.PillMatchers.isAPill;
@@ -33,13 +35,14 @@ public class GridSolverTest {
     @Test
     public void checkBasic() throws Exception {
         GridSolver gridSolver = new GridSolver(grid);
-        List<Pill> pills = gridSolver.solve();
-        Assert.assertEquals(4, pills.size());
-
-        Assert.assertThat(pills.get(0), isAPill(H, 0, 2));
-        Assert.assertThat(pills.get(1), isAPill(V, 4, 1));
-        Assert.assertThat(pills.get(2), isAPill(V, 5, 0));
-        Assert.assertThat(pills.get(3), isAPill(H, 0, 5));
+        Collection<List<Pill>> pills = gridSolver.solve();
+        Assert.assertThat(pills, hasItems(
+                hasItems(isAPill(H, 0, 2),
+                        isAPill(H, 0, 2),
+                        isAPill(V, 4, 1),
+                        isAPill(V, 5, 0),
+                        isAPill(H, 0, 5))
+        ));
     }
 
 

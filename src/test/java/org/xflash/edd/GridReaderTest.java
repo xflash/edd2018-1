@@ -29,4 +29,11 @@ public class GridReaderTest {
         Assert.assertArrayEquals(ROWS_SUMS, grid1.rowsSums);
         Assert.assertArrayEquals(GRID, grid1.cells);
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void checkBadRead() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resource = classLoader.getResource("bad_grid1.txt");
+        Grid grid1 = GridReader.from(new File(resource.getFile()));
+    }
 }

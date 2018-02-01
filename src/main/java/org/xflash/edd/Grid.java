@@ -2,7 +2,7 @@ package org.xflash.edd;
 
 public class Grid {
     final int w;
-    private final int h;
+    final int h;
     public int[] colsSums;
     public int[] rowsSums;
     public int[][] cells;

@@ -19,17 +19,18 @@ public class GridReaderTest {
     public static final int[] COLS_SUMS = {2, 1, 2, 2, 3};
     public static final int[] ROWS_SUMS = {2, 1, 1, 2, 4};
 
+
+    @Test(expected = IllegalArgumentException.class)
+    public void checkBadRead() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resource = classLoader.getResource("bad_grid1.txt");
+        Grid grid1 = GridReader.from(new File(resource.getFile()));
+    }
+
     @Test
     public void checkRead() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
         URL resource = classLoader.getResource("grid1.txt");
-        assertGrid1(GridReader.from(new File(resource.getFile())));
-    }
-
-    @Test
-    public void checkReadWithSpace() throws Exception {
-        ClassLoader classLoader = getClass().getClassLoader();
-        URL resource = classLoader.getResource("grid1_with_spaces.txt");
         assertGrid1(GridReader.from(new File(resource.getFile())));
     }
 
@@ -40,10 +41,18 @@ public class GridReaderTest {
         Assert.assertArrayEquals(GRID, grid1.cells);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void checkBadRead() throws Exception {
+    @Test
+    public void checkReadWithSpace() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
-        URL resource = classLoader.getResource("bad_grid1.txt");
-        Grid grid1 = GridReader.from(new File(resource.getFile()));
+        URL resource = classLoader.getResource("grid1_with_spaces.txt");
+        assertGrid1(GridReader.from(new File(resource.getFile())));
     }
+
+    @Test
+    public void checkReadWithComments() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resource = classLoader.getResource("grid1_with_comments.txt");
+        assertGrid1(GridReader.from(new File(resource.getFile())));
+    }
+
 }

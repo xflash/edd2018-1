@@ -53,7 +53,7 @@ public class GridReader {
     private static int[] readNextIntRow(BufferedReader br) throws IOException {
         String line = nextReadableLine(br);
         if (line == null) throw new IllegalArgumentException("Could not read an additional Line");
-        String[] strings = line.split(" ");
+        String[] strings = line.split("\\s+");
         int[] integers = new int[strings.length];
         for (int i = 0; i < strings.length; i++) {
             integers[i] = Integer.valueOf(strings[i]);

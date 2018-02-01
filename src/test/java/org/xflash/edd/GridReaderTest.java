@@ -23,7 +23,17 @@ public class GridReaderTest {
     public void checkRead() throws Exception {
         ClassLoader classLoader = getClass().getClassLoader();
         URL resource = classLoader.getResource("grid1.txt");
-        Grid grid1 = GridReader.from(new File(resource.getFile()));
+        assertGrid1(GridReader.from(new File(resource.getFile())));
+    }
+
+    @Test
+    public void checkReadWithSpace() throws Exception {
+        ClassLoader classLoader = getClass().getClassLoader();
+        URL resource = classLoader.getResource("grid1_with_spaces.txt");
+        assertGrid1(GridReader.from(new File(resource.getFile())));
+    }
+
+    private void assertGrid1(Grid grid1) {
         Assert.assertNotNull(grid1);
         Assert.assertArrayEquals(COLS_SUMS, grid1.colsSums);
         Assert.assertArrayEquals(ROWS_SUMS, grid1.rowsSums);

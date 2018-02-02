@@ -1,11 +1,14 @@
 package org.xflash.edd;
 
+import org.xflash.edd.model.Grid;
+import org.xflash.edd.model.Pill;
+
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-import static org.xflash.edd.Pill.Orientation.H;
-import static org.xflash.edd.Pill.Orientation.V;
+import static org.xflash.edd.model.Pill.Orientation.H;
+import static org.xflash.edd.model.Pill.Orientation.V;
 
 public class GridBrowser {
     private final Grid grid;
@@ -15,7 +18,7 @@ public class GridBrowser {
         this.grid = grid;
     }
 
-    void forEachPill(Consumer<Pill> consumer) {
+    public void forEachPill(Consumer<Pill> consumer) {
         int nb = getMaxPillOffset();
         forEachRow((row, r) -> {
             for (int i = 0; i <= nb; i++) {

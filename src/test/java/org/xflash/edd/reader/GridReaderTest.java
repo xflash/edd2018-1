@@ -1,7 +1,9 @@
-package org.xflash.edd;
+package org.xflash.edd.reader;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.xflash.edd.FileUtils;
+import org.xflash.edd.model.Grid;
 
 public class GridReaderTest {
 

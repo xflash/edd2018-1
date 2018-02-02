@@ -1,6 +1,6 @@
-package org.xflash.edd;
+package org.xflash.edd.model;
 
-import static org.xflash.edd.Pill.Orientation.V;
+import static org.xflash.edd.model.Pill.Orientation.V;
 
 public class Pill {
 

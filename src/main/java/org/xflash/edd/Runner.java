@@ -1,7 +1,11 @@
 package org.xflash.edd;
 
+import org.xflash.edd.model.Grid;
+import org.xflash.edd.model.GridSolution;
+import org.xflash.edd.reader.GridBuilder;
+import org.xflash.edd.solver.GridSolver;
+
 import java.util.Collection;
-import java.util.List;
 
 public class Runner {
 
@@ -19,8 +23,9 @@ public class Runner {
                         .rowsSums(new int[]{2, 1, 1, 2, 4})
                         .get();
 
-        GridSolver gridSolver = new GridSolver(grid);
-        Collection<List<Pill>> pills = gridSolver.solve();
+//        GridSolver gridSolver = new OldGridSolver();
+        GridSolver gridSolver = new NewGridSolver();
+        Collection<GridSolution> solutions = gridSolver.solve(grid);
 
 
     }

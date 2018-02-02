@@ -1,4 +1,6 @@
-package org.xflash.edd;
+package org.xflash.edd.reader;
+
+import org.xflash.edd.model.Grid;
 
 public class GridBuilder {
 

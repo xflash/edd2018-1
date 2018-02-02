@@ -4,14 +4,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.xflash.edd.FileUtils;
-import org.xflash.edd.Grid;
-import org.xflash.edd.GridReader;
-import org.xflash.edd.GridSolution;
 import org.xflash.edd.checkers.results.CheckResult;
 import org.xflash.edd.checkers.results.GridHeaderCheckResult;
+import org.xflash.edd.model.Grid;
+import org.xflash.edd.model.GridSolution;
+import org.xflash.edd.reader.GridReader;
 
-import static org.xflash.edd.Pill.hpill;
-import static org.xflash.edd.Pill.vpill;
+import static org.xflash.edd.model.Pill.hpill;
+import static org.xflash.edd.model.Pill.vpill;
 
 public class GridHeaderSolutionCheckerTest {
 

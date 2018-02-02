@@ -1,8 +1,8 @@
-package org.xflash.edd;
+package org.xflash.edd.model;
 
 public class Grid {
-    final int w;
-    final int h;
+    public final int w;
+    public final int h;
     public int[] colsSums;
     public int[] rowsSums;
     public int[][] cells;

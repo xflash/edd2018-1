@@ -3,6 +3,7 @@ package org.xflash.edd;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.xflash.edd.model.Pill;
 
 public class PillMatchers {
     static Matcher<? super Pill> isAPill(final Pill.Orientation orientation, final int x, final int y) {

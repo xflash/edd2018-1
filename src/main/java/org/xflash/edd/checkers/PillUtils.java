@@ -1,6 +1,6 @@
 package org.xflash.edd.checkers;
 
-import org.xflash.edd.Pill;
+import org.xflash.edd.model.Pill;
 
 public class PillUtils {
     static boolean pillCollapse(Pill l, Pill r) {

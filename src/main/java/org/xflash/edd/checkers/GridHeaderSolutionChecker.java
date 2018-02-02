@@ -1,11 +1,11 @@
 package org.xflash.edd.checkers;
 
-import org.xflash.edd.Grid;
-import org.xflash.edd.GridSolution;
-import org.xflash.edd.Pair;
-import org.xflash.edd.Pill;
 import org.xflash.edd.checkers.results.CheckResult;
 import org.xflash.edd.checkers.results.GridHeaderCheckResult;
+import org.xflash.edd.model.Grid;
+import org.xflash.edd.model.GridSolution;
+import org.xflash.edd.model.Pair;
+import org.xflash.edd.model.Pill;
 
 import java.util.HashMap;
 import java.util.HashSet;

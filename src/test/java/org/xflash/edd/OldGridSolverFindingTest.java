@@ -5,6 +5,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.xflash.edd.model.Grid;
+import org.xflash.edd.model.Pill;
+import org.xflash.edd.reader.GridBuilder;
+import org.xflash.edd.solver.OldGridSolver;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -12,11 +16,11 @@ import java.util.HashMap;
 import java.util.Set;
 
 import static org.junit.runners.Parameterized.Parameters;
-import static org.xflash.edd.Pill.Orientation.H;
-import static org.xflash.edd.Pill.Orientation.V;
+import static org.xflash.edd.model.Pill.Orientation.H;
+import static org.xflash.edd.model.Pill.Orientation.V;
 
 @RunWith(Parameterized.class)
-public class GridSolverFindingTest {
+public class OldGridSolverFindingTest {
 
     public static final HashMap<Integer, Collection<Pill>> EXPECTATIONS = new HashMap<>();
     private static Grid grid;
@@ -44,7 +48,7 @@ public class GridSolverFindingTest {
 
     private int num;
 
-    public GridSolverFindingTest(int num) {
+    public OldGridSolverFindingTest(int num) {
         this.num = num;
     }
 
@@ -74,8 +78,8 @@ public class GridSolverFindingTest {
 
     @Test
     public void checkFinding() throws Exception {
-        GridSolver gridSolver = new GridSolver(grid);
-        Set<Pill> allFor = gridSolver.findAllPillsMatching(num);
+        OldGridSolver gridSolver = new OldGridSolver();
+        Set<Pill> allFor = gridSolver.findAllPillsMatching(num, new GridBrowser(grid));
 
         Collection<Pill> expectatedPills = EXPECTATIONS.get(num);
         Assert.assertEquals("Check " + allFor, allFor.size(), expectatedPills.size());

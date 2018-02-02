@@ -3,9 +3,12 @@ package org.xflash.edd;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.xflash.edd.model.Grid;
+import org.xflash.edd.model.Pill;
+import org.xflash.edd.reader.GridBuilder;
 
-import static org.xflash.edd.Pill.Orientation.H;
-import static org.xflash.edd.Pill.Orientation.V;
+import static org.xflash.edd.model.Pill.Orientation.H;
+import static org.xflash.edd.model.Pill.Orientation.V;
 
 public class GridBrowserTest {
 

@@ -1,7 +1,7 @@
 package org.xflash.edd.checkers.results;
 
-import org.xflash.edd.Pair;
-import org.xflash.edd.Pill;
+import org.xflash.edd.model.Pair;
+import org.xflash.edd.model.Pill;
 
 import java.util.Collection;
 

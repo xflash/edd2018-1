@@ -1,14 +1,17 @@
-package org.xflash.edd;
+package org.xflash.edd.reader;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.xflash.edd.GridPrinter;
+import org.xflash.edd.model.Grid;
+import org.xflash.edd.model.Pill;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.Collections;
 
-import static org.xflash.edd.Pill.Orientation.H;
+import static org.xflash.edd.model.Pill.Orientation.H;
 
 public class GridPrinterTest {
 

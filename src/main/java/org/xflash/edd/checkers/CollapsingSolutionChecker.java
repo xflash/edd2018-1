@@ -1,10 +1,10 @@
 package org.xflash.edd.checkers;
 
-import org.xflash.edd.GridSolution;
-import org.xflash.edd.Pair;
-import org.xflash.edd.Pill;
 import org.xflash.edd.checkers.results.CheckResult;
 import org.xflash.edd.checkers.results.CollapsedPillCheckResult;
+import org.xflash.edd.model.GridSolution;
+import org.xflash.edd.model.Pair;
+import org.xflash.edd.model.Pill;
 
 import java.util.HashSet;
 import java.util.Set;

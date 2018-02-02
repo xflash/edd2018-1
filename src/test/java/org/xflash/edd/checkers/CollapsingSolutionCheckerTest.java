@@ -3,12 +3,12 @@ package org.xflash.edd.checkers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.xflash.edd.GridSolution;
 import org.xflash.edd.checkers.results.CheckResult;
 import org.xflash.edd.checkers.results.CollapsedPillCheckResult;
+import org.xflash.edd.model.GridSolution;
 
-import static org.xflash.edd.Pill.hpill;
-import static org.xflash.edd.Pill.vpill;
+import static org.xflash.edd.model.Pill.hpill;
+import static org.xflash.edd.model.Pill.vpill;
 
 public class CollapsingSolutionCheckerTest {
 

@@ -1,4 +1,4 @@
-package org.xflash.edd;
+package org.xflash.edd.model;
 
 public class GridSolution {
     private final Pill[] pills;

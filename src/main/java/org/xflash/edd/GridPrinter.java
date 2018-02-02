@@ -1,8 +1,10 @@
 package org.xflash.edd;
 
+import org.xflash.edd.model.Grid;
+import org.xflash.edd.model.Pill;
+
 import java.io.PrintStream;
 import java.util.Collection;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class GridPrinter {

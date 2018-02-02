@@ -15,6 +15,7 @@ public class GridSolutionChecker {
         solutionCheckers = new HashSet<>();
         solutionCheckers.add(new CollapsingSolutionChecker());
         solutionCheckers.add(new ValueSolutionChecker(grid));
+        solutionCheckers.add(new GridHeaderSolutionChecker(grid));
     }
 
     public CheckResult check(GridSolution solution) {

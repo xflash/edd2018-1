@@ -7,7 +7,7 @@ import java.util.function.Consumer;
 import static org.xflash.edd.Pill.Orientation.H;
 import static org.xflash.edd.Pill.Orientation.V;
 
-class GridBrowser {
+public class GridBrowser {
     private final Grid grid;
 
     public GridBrowser(Grid grid) {

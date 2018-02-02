@@ -3,9 +3,6 @@ package org.xflash.edd;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.io.File;
-import java.net.URL;
-
 public class GridReaderTest {
 
 
@@ -22,16 +19,12 @@ public class GridReaderTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void checkBadRead() throws Exception {
-        ClassLoader classLoader = getClass().getClassLoader();
-        URL resource = classLoader.getResource("bad_grid1.txt");
-        Grid grid1 = GridReader.from(new File(resource.getFile()));
+        GridReader.from(FileUtils.classpath("bad_grid1.txt"));
     }
 
     @Test
     public void checkRead() throws Exception {
-        ClassLoader classLoader = getClass().getClassLoader();
-        URL resource = classLoader.getResource("grid1.txt");
-        assertGrid1(GridReader.from(new File(resource.getFile())));
+        assertGrid1(GridReader.from(FileUtils.classpath("grid1.txt")));
     }
 
     private void assertGrid1(Grid grid1) {
@@ -43,16 +36,12 @@ public class GridReaderTest {
 
     @Test
     public void checkReadWithSpace() throws Exception {
-        ClassLoader classLoader = getClass().getClassLoader();
-        URL resource = classLoader.getResource("grid1_with_spaces.txt");
-        assertGrid1(GridReader.from(new File(resource.getFile())));
+        assertGrid1(GridReader.from(FileUtils.classpath("grid1_with_spaces.txt")));
     }
 
     @Test
     public void checkReadWithComments() throws Exception {
-        ClassLoader classLoader = getClass().getClassLoader();
-        URL resource = classLoader.getResource("grid1_with_comments.txt");
-        assertGrid1(GridReader.from(new File(resource.getFile())));
+        assertGrid1(GridReader.from(FileUtils.classpath("grid1_with_comments.txt")));
     }
 
 }

@@ -18,7 +18,7 @@ public class PillMatchers {
 
             protected boolean matchesSafely(Pill item) {
                 return item != null
-                        && orientation.equals(item.orientation)
+                        && orientation.equals(item.o)
                         && x == item.x
                         && y == item.y
                         ;

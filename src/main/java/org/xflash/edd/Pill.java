@@ -4,14 +4,22 @@ import static org.xflash.edd.Pill.Orientation.V;
 
 public class Pill {
 
-    final int x;
-    final int y;
-    final Orientation orientation;
+    public final int x;
+    public final int y;
+    public final Orientation o;
 
-    public Pill(Orientation orientation, int x, int y) {
+    public Pill(Orientation o, int x, int y) {
         this.x = x;
         this.y = y;
-        this.orientation = orientation;
+        this.o = o;
+    }
+
+    public static Pill hpill(int x, int y) {
+        return new Pill(Orientation.H, x, y);
+    }
+
+    public static Pill vpill(int x, int y) {
+        return new Pill(V, x, y);
     }
 
     @Override
@@ -23,14 +31,14 @@ public class Pill {
 
         if (x != pill.x) return false;
         if (y != pill.y) return false;
-        return orientation == pill.orientation;
+        return this.o == pill.o;
     }
 
     @Override
     public int hashCode() {
         int result = x;
         result = 31 * result + y;
-        result = 31 * result + (orientation != null ? orientation.hashCode() : 0);
+        result = 31 * result + (o != null ? o.hashCode() : 0);
         return result;
     }
 
@@ -39,16 +47,16 @@ public class Pill {
         return "Pill{" +
                 "x=" + x +
                 ", y=" + y +
-                ", orientation=" + orientation +
+                ", orientation=" + o +
                 '}';
     }
 
     public boolean V() {
-        return V.equals(orientation);
+        return V.equals(o);
     }
 
     public boolean H() {
-        return Orientation.H.equals(orientation);
+        return Orientation.H.equals(o);
     }
 
     public static enum Orientation {

@@ -52,10 +52,10 @@ class GridBrowser {
 
     public int sumPill(Pill p) {
         int sum = 0;
-        if (p.orientation.equals(H) && p.x > getMaxPillOffset()
-                || p.orientation.equals(V) && p.y > getMaxPillOffset())
+        if (p.o.equals(H) && p.x > getMaxPillOffset()
+                || p.o.equals(V) && p.y > getMaxPillOffset())
             throw new IllegalArgumentException("This pill is out of bound " + p);
-        if (H.equals(p.orientation)) {
+        if (H.equals(p.o)) {
             sum += grid.cells[p.y][p.x + 0];
             sum += grid.cells[p.y][p.x + 1];
             sum += grid.cells[p.y][p.x + 2];

@@ -9,4 +9,5 @@ Les nombre au bord du chéma indiquent la somme de nombre dans les cases qui fon
 
 
 ##Sample
-![alt text](./doc/aufgabe2.PNG "Samples")
+![](./doc/aufgabe2.PNG "Samples")
+![](./doc/aufgabe.PNG "DESC")

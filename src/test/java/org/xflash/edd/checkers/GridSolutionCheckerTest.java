@@ -7,6 +7,7 @@ import org.xflash.edd.FileUtils;
 import org.xflash.edd.Grid;
 import org.xflash.edd.GridReader;
 import org.xflash.edd.GridSolution;
+import org.xflash.edd.checkers.results.CheckResult;
 
 import static org.xflash.edd.Pill.hpill;
 import static org.xflash.edd.Pill.vpill;
@@ -24,7 +25,7 @@ public class GridSolutionCheckerTest {
 
     @Test
     public void checkPillOK() throws Exception {
-        ResultCheck rc = gridSolutionChecker.check(GridSolution.with(
+        CheckResult rc = gridSolutionChecker.check(GridSolution.with(
                 hpill(0, 2),
                 vpill(3, 1),
                 vpill(4, 0),

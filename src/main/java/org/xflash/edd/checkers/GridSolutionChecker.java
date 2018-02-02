@@ -2,6 +2,7 @@ package org.xflash.edd.checkers;
 
 import org.xflash.edd.Grid;
 import org.xflash.edd.GridSolution;
+import org.xflash.edd.checkers.results.CheckResult;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,10 +17,10 @@ public class GridSolutionChecker {
         solutionCheckers.add(new ValueSolutionChecker(grid));
     }
 
-    public ResultCheck check(GridSolution solution) {
+    public CheckResult check(GridSolution solution) {
         for (SolutionChecker solutionChecker : solutionCheckers) {
-            ResultCheck resultCheck = solutionChecker.check(solution);
-            if (resultCheck != null) return resultCheck;
+            CheckResult checkResult = solutionChecker.check(solution);
+            if (checkResult != null) return checkResult;
         }
         return null;
     }

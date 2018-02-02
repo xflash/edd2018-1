@@ -3,10 +3,15 @@ package org.xflash.edd.checkers;
 import org.xflash.edd.Grid;
 import org.xflash.edd.GridSolution;
 import org.xflash.edd.Pill;
+import org.xflash.edd.checkers.results.CheckResult;
+import org.xflash.edd.checkers.results.ValueMismatchCheckResult;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Enforce pills value (given by a order) are ok with grid cells value
+ */
 public class ValueSolutionChecker implements SolutionChecker {
     private final Grid grid;
 
@@ -15,7 +20,7 @@ public class ValueSolutionChecker implements SolutionChecker {
     }
 
     @Override
-    public ResultCheck check(GridSolution solution) {
+    public CheckResult check(GridSolution solution) {
         Set<Pill> badpills = new LinkedHashSet<>();
         for (int i = 0; i < solution.getPills().length; i++) {
             Pill pill = solution.getPills()[i];
@@ -23,7 +28,7 @@ public class ValueSolutionChecker implements SolutionChecker {
             if (val != (i + 1)) badpills.add(pill);
         }
         if (!badpills.isEmpty())
-            return new ValueMismatch(badpills);
+            return new ValueMismatchCheckResult(badpills);
 
         return null;
     }

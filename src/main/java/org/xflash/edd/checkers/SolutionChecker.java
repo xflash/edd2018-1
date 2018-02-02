@@ -1,7 +1,8 @@
 package org.xflash.edd.checkers;
 
 import org.xflash.edd.GridSolution;
+import org.xflash.edd.checkers.results.CheckResult;
 
 public interface SolutionChecker {
-    ResultCheck check(GridSolution solution);
+    CheckResult check(GridSolution solution);
 }

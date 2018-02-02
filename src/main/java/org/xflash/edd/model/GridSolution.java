@@ -1,17 +1,20 @@
 package org.xflash.edd.model;
 
-public class GridSolution {
-    private final Pill[] pills;
+import java.util.Arrays;
+import java.util.List;
 
-    public GridSolution(Pill[] pills) {
+public class GridSolution {
+    private final List<Pill> pills;
+
+    public GridSolution(List<Pill> pills) {
         this.pills = pills;
     }
 
     public static GridSolution with(Pill... pills) {
-        return new GridSolution(pills);
+        return new GridSolution(Arrays.asList(pills));
     }
 
-    public Pill[] getPills() {
+    public List<Pill> getPills() {
         return pills;
     }
 }

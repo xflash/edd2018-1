@@ -22,8 +22,8 @@ public class ValueSolutionChecker implements SolutionChecker {
     @Override
     public CheckResult check(GridSolution solution) {
         Set<Pill> badpills = new LinkedHashSet<>();
-        for (int i = 0; i < solution.getPills().length; i++) {
-            Pill pill = solution.getPills()[i];
+        for (int i = 0; i < solution.getPills().size(); i++) {
+            Pill pill = solution.getPills().get(i);
             int val = computePillValInGrid(pill);
             if (val != (i + 1)) badpills.add(pill);
         }
@@ -34,13 +34,7 @@ public class ValueSolutionChecker implements SolutionChecker {
     }
 
     private int computePillValInGrid(Pill pill) {
-        int v = 0;
-        for (int h = 0; h < 3; h++) {
-            if (pill.H())
-                v += grid.cells[pill.y][pill.x + h];
-            else
-                v += grid.cells[pill.y + h][pill.x];
-        }
-        return v;
+        return GridPillUtils.computePillValInGrid(pill, grid);
     }
+
 }

@@ -7,6 +7,7 @@ import org.xflash.edd.model.Pair;
 import org.xflash.edd.model.Pill;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,19 +16,24 @@ import java.util.Set;
 public class CollapsingSolutionChecker implements SolutionChecker {
     @Override
     public CheckResult check(GridSolution solution) {
+        Set<Pair<Pill, Pill>> collapsing = checkPills(solution.getPills());
+        if (!collapsing.isEmpty())
+            return new CollapsedPillCheckResult(collapsing);
+
+        return null;
+    }
+
+    Set<Pair<Pill, Pill>> checkPills(List<Pill> pills) {
         Set<Pair<Pill, Pill>> collapsing = new HashSet<>();
-        for (Pill activepill : solution.getPills()) {
-            for (Pill pill : solution.getPills()) {
+        for (Pill activepill : pills) {
+            for (Pill pill : pills) {
                 if (pill.equals(activepill)) continue;
                 if (PillUtils.pillCollapse(activepill, pill)) {
                     collapsing.add(new Pair<>(activepill, pill));
                 }
             }
         }
-        if (!collapsing.isEmpty())
-            return new CollapsedPillCheckResult(collapsing);
-
-        return null;
+        return collapsing;
     }
 
 }

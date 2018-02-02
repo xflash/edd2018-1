@@ -1,5 +1,6 @@
 package org.xflash.edd;
 
+import org.xflash.edd.checkers.GridPillUtils;
 import org.xflash.edd.model.Grid;
 import org.xflash.edd.model.Pill;
 
@@ -99,5 +100,25 @@ public class GridBrowser {
 
     public boolean isPillCorrectSum(Pill pill) {
         return sum4(pill) == sumPill(pill);
+    }
+
+    void forEachValuedPill(int v, Consumer<Pill> pillConsumer) {
+        int maxW = grid.w - 3;
+        int maxH = grid.h - 3;
+        for (int x = 0; x < maxW; x++) {
+            for (int y = 0; y < grid.h; y++) {
+                Pill p = new Pill(Pill.Orientation.H, x, y);
+                if (GridPillUtils.computePillValInGrid(p, grid) == v)
+                    pillConsumer.accept(p);
+            }
+        }
+        for (int x = 0; x < grid.w; x++) {
+            for (int y = 0; y < maxH; y++) {
+                Pill p = new Pill(Pill.Orientation.V, x, y);
+                if (GridPillUtils.computePillValInGrid(p, grid) == v)
+                    pillConsumer.accept(p);
+            }
+        }
+
     }
 }

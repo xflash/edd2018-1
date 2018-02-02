@@ -9,6 +9,7 @@ import org.xflash.edd.model.Pill;
 import org.xflash.edd.reader.GridBuilder;
 import org.xflash.edd.solver.OldGridSolver;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 public class OldGridSolverTest {
@@ -37,14 +38,14 @@ public class OldGridSolverTest {
         Collection<GridSolution> gridSolutions = gridSolver.solve(grid, grid.w);
         Assert.assertEquals(1, gridSolutions.size());
         for (GridSolution gridSolution : gridSolutions) {
-            Assert.assertArrayEquals(gridSolution.getPills(),
-                    new Pill[]{
+            Assert.assertEquals(gridSolution.getPills(),
+                    Arrays.asList(
                             Pill.hpill(0, 2),
                             Pill.hpill(0, 2),
                             Pill.vpill(4, 1),
                             Pill.vpill(5, 0),
                             Pill.hpill(0, 5)
-                    });
+                    ));
         }
     }
 

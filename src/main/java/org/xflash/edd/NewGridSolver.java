@@ -8,7 +8,7 @@ import java.util.Collection;
 
 public class NewGridSolver implements GridSolver {
     @Override
-    public Collection<GridSolution> solve(Grid grid) {
+    public Collection<GridSolution> solve(Grid grid, int maxNb) {
         return null;
     }
 }

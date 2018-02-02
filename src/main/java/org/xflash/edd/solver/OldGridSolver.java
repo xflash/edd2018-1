@@ -9,9 +9,9 @@ import java.util.*;
 
 public class OldGridSolver implements GridSolver {
 
-    public Collection<GridSolution> solve(Grid grid) {
+    public Collection<GridSolution> solve(Grid grid, int maxNb) {
         GridBrowser gridBrowser = new GridBrowser(grid);
-        Map<Integer, Set<Pill>> map = compute4AllNumbers(grid.w, gridBrowser);
+        Map<Integer, Set<Pill>> map = compute4AllNumbers(maxNb, gridBrowser);
 
         List<GridSolution> sola = new ArrayList<>();
 

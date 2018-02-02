@@ -6,5 +6,5 @@ import org.xflash.edd.model.GridSolution;
 import java.util.Collection;
 
 public interface GridSolver {
-    Collection<GridSolution> solve(Grid grid);
+    Collection<GridSolution> solve(Grid grid, int maxNb);
 }

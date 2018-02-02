@@ -34,7 +34,7 @@ public class OldGridSolverTest {
     @Test
     public void checkBasic() throws Exception {
         OldGridSolver gridSolver = new OldGridSolver();
-        Collection<GridSolution> gridSolutions = gridSolver.solve(grid);
+        Collection<GridSolution> gridSolutions = gridSolver.solve(grid, grid.w);
         Assert.assertEquals(1, gridSolutions.size());
         for (GridSolution gridSolution : gridSolutions) {
             Assert.assertArrayEquals(gridSolution.getPills(),

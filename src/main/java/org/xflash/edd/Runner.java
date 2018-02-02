@@ -25,7 +25,7 @@ public class Runner {
 
 //        GridSolver gridSolver = new OldGridSolver();
         GridSolver gridSolver = new NewGridSolver();
-        Collection<GridSolution> solutions = gridSolver.solve(grid);
+        Collection<GridSolution> solutions = gridSolver.solve(grid, 4);
 
 
     }

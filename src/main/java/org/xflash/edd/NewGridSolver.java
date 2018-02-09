@@ -1,9 +1,13 @@
 package org.xflash.edd;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.xflash.edd.checkers.CollapsingSolutionChecker;
 import org.xflash.edd.checkers.GridHeaderSolutionChecker;
+import org.xflash.edd.checkers.SolutionChecker;
+import org.xflash.edd.checkers.results.CheckResult;
 import org.xflash.edd.model.Grid;
 import org.xflash.edd.model.GridSolution;
-import org.xflash.edd.model.Pair;
 import org.xflash.edd.model.Pill;
 import org.xflash.edd.solver.GridSolver;
 
@@ -11,28 +15,56 @@ import java.util.*;
 
 public class NewGridSolver implements GridSolver {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(NewGridSolver.class);
+
     @Override
     public Collection<GridSolution> solve(Grid grid, int maxNb) {
 
         GridBrowser gridBrowser = new GridBrowser(grid);
         Set<Pill> pills = new HashSet<>();
 
-//        CollapsingSolutionChecker collapsingSolutionChecker = new CollapsingSolutionChecker();
         GridHeaderSolutionChecker gridHeaderSolutionChecker = new GridHeaderSolutionChecker(grid);
+        SolutionChecker collapseChecker = new CollapsingSolutionChecker();
 
-        for (int n = maxNb; n <= 0; n--) {
-            gridBrowser.forEachValuedPill(n, pills::add);
+        HashMap<Integer, Set<GridSolution>> map = new HashMap<>();
+
+
+        while (maxNb > 0) {
+            int v = maxNb--;
+            gridBrowser.forEachValuedPill(v,
+                    valuedPill -> {
+                        if (map.containsKey(v + 1)) {
+                            for (GridSolution gridSolution : map.get(v + 1)) {
+                                List<Pill> pills1 = new ArrayList<>(gridSolution.getPills());
+                                pills1.add(valuedPill);
+                                GridSolution newSolution = new GridSolution(pills1);
+                                CheckResult checkResult = collapseChecker.check(newSolution);
+                                if (checkResult == null) {
+                                    if (!map.containsKey(v))
+                                        map.put(v, new HashSet<>());
+                                    map.get(v).add(newSolution);
+                                }
+                            }
+                        } else {
+                            if (!map.containsKey(v))
+                                map.put(v, new HashSet<>());
+                            map.get(v).add(new GridSolution(Arrays.asList(valuedPill)));
+                        }
+
+
+                    });
         }
-        Set<Pill> filteredHeadValuesPills = new HashSet<>(pills);
 
-        Map<Pair<Pill.Orientation, Integer>, Set<Pill>> badPills = gridHeaderSolutionChecker.checkBadPills(pills);
-        for (Set<Pill> pillSet : badPills.values()) {
-            for (Pill pill : pillSet) {
-                pills.remove(pill);
+        HashSet<GridSolution> sols = new HashSet<>();
+        for (GridSolution gridSolution : map.get(1)) {
+            if (gridHeaderSolutionChecker.check(gridSolution) == null) {
+                sols.add(gridSolution);
             }
         }
 
-        return Collections.singletonList(new GridSolution(new ArrayList<>(pills)));
+        LOGGER.debug("Solutions {}", sols);
+
+        return sols;
     }
 
 

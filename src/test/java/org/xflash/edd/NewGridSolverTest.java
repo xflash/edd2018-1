@@ -15,7 +15,7 @@ public class NewGridSolverTest {
     private GridBrowser gridBrowser;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         grid = GridReader.from(FileUtils.classpath("grid1.txt"));
         gridBrowser = new GridBrowser(grid);
     }

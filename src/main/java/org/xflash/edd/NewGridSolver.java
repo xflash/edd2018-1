@@ -31,6 +31,7 @@ public class NewGridSolver implements GridSolver {
 
         while (maxNb > 0) {
             int v = maxNb--;
+            LOGGER.debug("Building possible solutions for Value : {}", v);
             gridBrowser.forEachValuedPill(v,
                     valuedPill -> {
                         if (map.containsKey(v + 1)) {
@@ -52,11 +53,16 @@ public class NewGridSolver implements GridSolver {
                         }
 
 
-                    });
+                    }
+            );
+            LOGGER.debug("Founded  possible solutions for Value : {} = {}", v, map.get(v).size());
+
         }
 
         HashSet<GridSolution> sols = new HashSet<>();
-        for (GridSolution gridSolution : map.get(1)) {
+        Set<GridSolution> possibleSolutions = map.get(1);
+        LOGGER.debug("Checking all final possible solutions {}", possibleSolutions.size());
+        for (GridSolution gridSolution : possibleSolutions) {
             if (gridHeaderSolutionChecker.check(gridSolution) == null) {
                 sols.add(gridSolution);
             }

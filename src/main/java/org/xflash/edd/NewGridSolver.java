@@ -35,7 +35,11 @@ public class NewGridSolver implements GridSolver {
             gridBrowser.forEachValuedPill(v,
                     valuedPill -> {
                         if (map.containsKey(v + 1)) {
-                            for (GridSolution gridSolution : map.get(v + 1)) {
+                            Set<GridSolution> gridSolutions = map.get(v + 1);
+                            LOGGER.debug("Checking if valued pill {} for value {} don't collapse with all {} grid Solutions of previous value {} ",
+                                    valuedPill, v, gridSolutions.size(), v + 1);
+
+                            for (GridSolution gridSolution : gridSolutions) {
                                 List<Pill> pills1 = new ArrayList<>(gridSolution.getPills());
                                 pills1.add(valuedPill);
                                 GridSolution newSolution = new GridSolution(pills1);

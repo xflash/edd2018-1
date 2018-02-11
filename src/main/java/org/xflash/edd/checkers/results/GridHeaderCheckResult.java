@@ -12,4 +12,5 @@ public class GridHeaderCheckResult implements CheckResult {
     public GridHeaderCheckResult(Map<Pair<Pill.Orientation, Integer>, Set<Pill>> pills) {
         this.pills = pills;
     }
+
 }

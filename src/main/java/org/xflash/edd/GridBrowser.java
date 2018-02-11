@@ -105,7 +105,7 @@ public class GridBrowser {
     void forEachValuedPill(int v, Consumer<Pill> pillConsumer) {
         int maxW = grid.w - 3;
         int maxH = grid.h - 3;
-        for (int x = 0; x < maxW; x++) {
+        for (int x = 0; x <= maxW; x++) {
             for (int y = 0; y < grid.h; y++) {
                 Pill p = new Pill(Pill.Orientation.H, x, y);
                 if (GridPillUtils.computePillValInGrid(p, grid) == v)
@@ -113,7 +113,7 @@ public class GridBrowser {
             }
         }
         for (int x = 0; x < grid.w; x++) {
-            for (int y = 0; y < maxH; y++) {
+            for (int y = 0; y <= maxH; y++) {
                 Pill p = new Pill(Pill.Orientation.V, x, y);
                 if (GridPillUtils.computePillValInGrid(p, grid) == v)
                     pillConsumer.accept(p);

@@ -3,9 +3,9 @@ package org.xflash.edd;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xflash.edd.checkers.CollapsingSolutionChecker;
+import org.xflash.edd.checkers.GridHeaderMinSolutionChecker;
 import org.xflash.edd.checkers.GridHeaderSolutionChecker;
 import org.xflash.edd.checkers.SolutionChecker;
-import org.xflash.edd.checkers.results.CheckResult;
 import org.xflash.edd.model.Grid;
 import org.xflash.edd.model.GridSolution;
 import org.xflash.edd.model.Pill;
@@ -24,6 +24,7 @@ public class NewGridSolver implements GridSolver {
         Set<Pill> pills = new HashSet<>();
 
         GridHeaderSolutionChecker gridHeaderSolutionChecker = new GridHeaderSolutionChecker(grid);
+        GridHeaderMinSolutionChecker gridHeaderMinSolutionChecker = new GridHeaderMinSolutionChecker(grid);
         SolutionChecker collapseChecker = new CollapsingSolutionChecker();
 
         HashMap<Integer, Set<GridSolution>> map = new HashMap<>();
@@ -31,50 +32,71 @@ public class NewGridSolver implements GridSolver {
 
         while (maxNb > 0) {
             int v = maxNb--;
-            LOGGER.debug("Building possible solutions for Value : {}", v);
+            LOGGER.debug("==> Building possible solutions for Value : {}", v);
+
             gridBrowser.forEachValuedPill(v,
                     valuedPill -> {
                         if (map.containsKey(v + 1)) {
-                            Set<GridSolution> gridSolutions = map.get(v + 1);
-                            LOGGER.debug("Checking if valued pill {} for value {} don't collapse with all {} grid Solutions of previous value {} ",
-                                    valuedPill, v, gridSolutions.size(), v + 1);
+                            Set<GridSolution> previousGridSolutions = map.get(v + 1);
+                            LOGGER.debug("Checking if valued pill {} for value {} match with {} grid Solutions of previous value {} ",
+                                    valuedPill, v, previousGridSolutions.size(), v + 1);
 
-                            for (GridSolution gridSolution : gridSolutions) {
-                                List<Pill> pills1 = new ArrayList<>(gridSolution.getPills());
-                                pills1.add(valuedPill);
-                                GridSolution newSolution = new GridSolution(pills1);
-                                CheckResult checkResult = collapseChecker.check(newSolution);
-                                if (checkResult == null) {
-                                    if (!map.containsKey(v))
-                                        map.put(v, new HashSet<>());
+                            for (GridSolution previousGridSolution : previousGridSolutions) {
+                                GridSolution newSolution = new GridSolution(previousGridSolution);
+                                newSolution.addPill(valuedPill);
+
+                                if (collapseChecker.check(newSolution) != null) {
+                                    LOGGER.debug("{} has some overlaps ", newSolution);
+                                } else if (gridHeaderMinSolutionChecker.check(newSolution) != null) {
+                                    LOGGER.debug("{} don't fit hint values", newSolution);
+                                } else {
+                                    LOGGER.debug("=> Adding a possible {} for value {}", newSolution, v);
+                                    if (!map.containsKey(v)) map.put(v, new HashSet<>());
                                     map.get(v).add(newSolution);
                                 }
+
                             }
+
                         } else {
-                            if (!map.containsKey(v))
-                                map.put(v, new HashSet<>());
-                            map.get(v).add(new GridSolution(Arrays.asList(valuedPill)));
+                            GridSolution newSolution = new GridSolution();
+                            newSolution.addPill(valuedPill);
+                            if (gridHeaderMinSolutionChecker.check(newSolution) == null) {
+                                LOGGER.debug("=> Adding a possible {} for value {}", newSolution, v);
+                                if (!map.containsKey(v))
+                                    map.put(v, new HashSet<>());
+                                map.get(v).add(newSolution);
+                            } else {
+                                LOGGER.debug("{} don't fit hint values", newSolution);
+                            }
                         }
-
-
                     }
             );
-            LOGGER.debug("Founded  possible solutions for Value : {} = {}", v, map.get(v).size());
 
+            if (map.get(v) == null) {
+                LOGGER.info("No solutions remains after value {}", v);
+                return Collections.emptyList();
+            }
+
+            LOGGER.debug("Possible solutions for Value : {} = {}", v, map.get(v));
+
+//            if (map.containsKey(v + 1)) {
+//                LOGGER.debug("Remove {} possible values for previous value {}", map.get(v + 1).size(), v + 1);
+//                map.remove(v + 1);
+//            }
         }
 
-        HashSet<GridSolution> sols = new HashSet<>();
+        Set<GridSolution> goodSols = new HashSet<>();
         Set<GridSolution> possibleSolutions = map.get(1);
-        LOGGER.debug("Checking all final possible solutions {}", possibleSolutions.size());
+        LOGGER.debug("Checking the {} possible solutions for {}", possibleSolutions.size(), 1);
         for (GridSolution gridSolution : possibleSolutions) {
             if (gridHeaderSolutionChecker.check(gridSolution) == null) {
-                sols.add(gridSolution);
+                goodSols.add(gridSolution);
             }
         }
 
-        LOGGER.debug("Solutions {}", sols);
+        LOGGER.debug("Solutions {}", goodSols);
 
-        return sols;
+        return goodSols;
     }
 
 

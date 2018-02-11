@@ -2,7 +2,6 @@ package org.xflash.edd;
 
 import org.xflash.edd.model.Grid;
 import org.xflash.edd.model.GridSolution;
-import org.xflash.edd.model.Pill;
 import org.xflash.edd.reader.GridReader;
 import org.xflash.edd.solver.GridSolver;
 
@@ -12,6 +11,7 @@ public class Runner {
 
     public static void main(String[] args) {
 
+        Grid grid1 = GridReader.from(FileUtils.classpath("grid1.txt"));
         Grid grid2 = GridReader.from(FileUtils.classpath("grid2.txt"));
         Grid grid = grid2;
 
@@ -30,13 +30,10 @@ public class Runner {
 
 //        GridSolver gridSolver = new OldGridSolver();
         GridSolver gridSolver = new NewGridSolver();
-        Collection<GridSolution> solutions = gridSolver.solve(grid2, 10);
+        Collection<GridSolution> solutions = gridSolver.solve(grid, 10);
 
         for (GridSolution solution : solutions) {
             System.out.println("solution = " + solution);
-            for (Pill pill : solution.getPills()) {
-                System.out.println("pill = " + pill);
-            }
         }
 
 

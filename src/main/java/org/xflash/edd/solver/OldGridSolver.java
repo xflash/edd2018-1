@@ -19,7 +19,9 @@ public class OldGridSolver implements GridSolver {
             for (Pill pill : pills) {
                 List<Pill> sol = findSolStartingWith(pill, map, gridBrowser);
                 if (!sol.isEmpty()) {
-                    sola.add(new GridSolution(sol));
+                    GridSolution gridSolution = new GridSolution();
+                    gridSolution.addPill(pill);
+                    sola.add(gridSolution);
                 }
             }
         }

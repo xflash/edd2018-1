@@ -1,18 +1,26 @@
 package org.xflash.edd.model;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class GridSolution {
     private final List<Pill> pills;
 
-    public GridSolution(List<Pill> pills) {
-        this.pills = pills;
+    public GridSolution(GridSolution gridSolution) {
+        this.pills = new ArrayList<>(gridSolution.pills);
+    }
+
+    public GridSolution() {
+        this.pills = new ArrayList<>();
     }
 
     public static GridSolution with(Pill... pills) {
-        return new GridSolution(Arrays.asList(pills));
+        GridSolution gridSolution = new GridSolution();
+        for (Pill pill : pills) {
+            gridSolution.addPill(pill);
+        }
+        return gridSolution;
     }
 
     public List<Pill> getPills() {
@@ -31,5 +39,14 @@ public class GridSolution {
     public int hashCode() {
 
         return Objects.hash(pills);
+    }
+
+    @Override
+    public String toString() {
+        return "GridSolution " + pills;
+    }
+
+    public void addPill(Pill pill) {
+        this.pills.add(pill);
     }
 }

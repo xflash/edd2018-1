@@ -44,11 +44,7 @@ public class Pill {
 
     @Override
     public String toString() {
-        return "Pill{" +
-                "x=" + x +
-                ", y=" + y +
-                ", orientation=" + o +
-                '}';
+        return "{" + o + "(" + x + "," + y + ")}";
     }
 
     public boolean V() {

@@ -1,7 +1,8 @@
-package org.xflash.edd;
+package org.xflash.edd.solver;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.xflash.edd.GridBrowser;
 import org.xflash.edd.checkers.CollapsingSolutionChecker;
 import org.xflash.edd.checkers.GridHeaderMinSolutionChecker;
 import org.xflash.edd.checkers.GridHeaderSolutionChecker;
@@ -9,7 +10,6 @@ import org.xflash.edd.checkers.SolutionChecker;
 import org.xflash.edd.model.Grid;
 import org.xflash.edd.model.GridSolution;
 import org.xflash.edd.model.Pill;
-import org.xflash.edd.solver.GridSolver;
 
 import java.util.*;
 

@@ -4,6 +4,7 @@ import org.xflash.edd.model.Grid;
 import org.xflash.edd.model.GridSolution;
 import org.xflash.edd.reader.GridReader;
 import org.xflash.edd.solver.GridSolver;
+import org.xflash.edd.solver.NewGridSolver;
 
 import java.util.Collection;
 

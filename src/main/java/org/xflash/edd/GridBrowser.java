@@ -102,7 +102,7 @@ public class GridBrowser {
         return sum4(pill) == sumPill(pill);
     }
 
-    void forEachValuedPill(int v, Consumer<Pill> pillConsumer) {
+    public void forEachValuedPill(int v, Consumer<Pill> pillConsumer) {
         int maxW = grid.w - 3;
         int maxH = grid.h - 3;
         for (int x = 0; x <= maxW; x++) {
